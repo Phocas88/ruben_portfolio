@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruben V. Mendoza -- WMS &amp; Supply Chain Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"><\/script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0f12;--bg2:#13161b;--bg3:#1a1e26;--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);--text:#e8eaf0;--text2:#8a92a6;--text3:#545c6e;--amber:#f5a623;--amber2:#ffca6e;--adim:rgba(245,166,35,0.12);--blue:#4a9eff;--bdim:rgba(74,158,255,0.1);--green:#34d17a;--red:#f0615c;--mono:'IBM Plex Mono',monospace;--sans:'Inter',sans-serif;--r:8px}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+a{color:var(--amber);text-decoration:none}
+a:hover{color:var(--amber2);text-decoration:underline}
+.shell{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.sidebar{background:var(--bg2);border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sb-top{padding:28px 24px 22px;border-bottom:1px solid var(--border)}
+.rank{display:inline-flex;font-family:var(--mono);font-size:10px;color:var(--amber);letter-spacing:.1em;background:var(--adim);border:1px solid rgba(245,166,35,.25);border-radius:4px;padding:3px 8px;margin-bottom:14px}
+.sb-name{font-size:18px;font-weight:600;line-height:1.2;margin-bottom:4px}
+.sb-title{font-size:12px;color:var(--text2);line-height:1.5}
+.sb-contact{padding:14px 24px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:8px}
+.ci{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text2)}
+.sb-nav{padding:16px 12px;flex:1}
+.nlabel{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;padding:0 12px 8px}
+.ni{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:6px;font-size:13px;color:var(--text2);cursor:pointer;border:none;background:none;width:100%;text-align:left;transition:all .15s;margin-bottom:2px;text-decoration:none}
+.ni:hover{background:var(--bg3);color:var(--text);text-decoration:none}
+.ni.active{background:var(--adim);color:var(--amber)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--border2);flex-shrink:0}
+.ni.active .dot{background:var(--amber)}
+.sb-skills{padding:14px 24px;border-top:1px solid var(--border)}
+.slabel{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11px;font-family:var(--mono);padding:3px 8px;border-radius:4px;border:1px solid var(--border2);color:var(--text2);background:var(--bg3)}
+.chip.w{border-color:rgba(245,166,35,.3);color:var(--amber);background:var(--adim)}
+.main{overflow-y:auto}
+.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:48px 48px 40px}
+.eyebrow{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+h1{font-size:32px;font-weight:600;line-height:1.2;margin-bottom:12px;letter-spacing:-.02em}
+h1 span{color:var(--amber)}
+.sub{font-size:15px;color:var(--text2);max-width:560px;line-height:1.7;margin-bottom:28px}
+.hstats{display:flex;gap:32px;margin-bottom:28px;flex-wrap:wrap}
+.snum{font-family:var(--mono);font-size:22px;font-weight:500}
+.snum span{color:var(--amber)}
+.slbl{font-size:11px;color:var(--text3);margin-top:2px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btnp{display:inline-flex;align-items:center;background:var(--amber);color:#0d0f12;font-weight:600;font-size:13px;padding:10px 20px;border-radius:var(--r);text-decoration:none;border:none;cursor:pointer;transition:all .15s}
+.btnp:hover{background:var(--amber2);color:#0d0f12;text-decoration:none}
+.btno{display:inline-flex;align-items:center;background:transparent;color:var(--text2);font-size:13px;font-weight:500;padding:10px 20px;border-radius:var(--r);border:1px solid var(--border2);text-decoration:none;cursor:pointer;transition:all .15s}
+.btno:hover{color:var(--text);border-color:var(--text2);text-decoration:none}
+section{padding:40px 48px;border-bottom:1px solid var(--border)}
+.se{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.st{font-size:20px;font-weight:600;margin-bottom:4px}
+.ss{font-size:13px;color:var(--text2);margin-bottom:24px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s}
+.pc:hover{border-color:var(--border2)}
+.pc.feat{border-color:rgba(245,166,35,.3);grid-column:1/-1}
+.ph{padding:20px 22px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.badge{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0}
+.blive{background:rgba(52,209,122,.12);color:var(--green);border:1px solid rgba(52,209,122,.25)}
+.bbuilt{background:var(--bdim);color:var(--blue);border:1px solid rgba(74,158,255,.25)}
+.pname{font-size:15px;font-weight:600;margin-bottom:4px}
+.porg{font-size:12px;color:var(--text3);font-family:var(--mono)}
+.pb{padding:16px 22px}
+.pdesc{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:14px}
+.pbul{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.pbul li{font-size:12px;color:var(--text2);padding-left:14px;position:relative;line-height:1.5}
+.pbul li::before{content:'>';position:absolute;left:0;color:var(--amber);font-family:var(--mono)}
+.ptags{display:flex;flex-wrap:wrap;gap:6px}
+.ptag{font-family:var(--mono);font-size:10px;color:var(--text3);background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:2px 7px}
+.tabs{display:flex;gap:4px;margin-bottom:24px;flex-wrap:wrap}
+.tbtn{font-family:var(--mono);font-size:11px;padding:7px 14px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--text2);cursor:pointer;transition:all .15s}
+.tbtn:hover{background:var(--bg3)}
+.tbtn.active{background:var(--adim);border-color:rgba(245,166,35,.3);color:var(--amber)}
+.tpanel{display:none}
+.tpanel.active{display:block}
+.krow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.kpi{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px}
+.kl{font-size:11px;color:var(--text3);margin-bottom:6px}
+.kv{font-family:var(--mono);font-size:20px;font-weight:500}
+.kd{font-size:11px;margin-top:4px}
+.up{color:var(--green)} .dg{color:var(--green)} .wa{color:var(--amber)}
+.c2{display:grid;grid-template-columns:3fr 2fr;gap:16px;margin-bottom:16px}
+.cbox{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px}
+.clbl{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.igrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.itw{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px}
+table.inv{width:100%;border-collapse:collapse;font-size:12px}
+table.inv th{font-family:var(--mono);font-size:10px;color:var(--text3);text-align:left;padding:0 10px 10px 0;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--border)}
+table.inv td{padding:9px 10px 9px 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)}
+table.inv td:first-child{color:var(--text);font-weight:500}
+table.inv tr:last-child td{border-bottom:none}
+.sp{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:20px}
+.sok{background:rgba(52,209,122,.12);color:var(--green);border:1px solid rgba(52,209,122,.2)}
+.slow{background:rgba(245,166,35,.12);color:var(--amber);border:1px solid rgba(245,166,35,.2)}
+.sout{background:rgba(240,97,92,.12);color:var(--red);border:1px solid rgba(240,97,92,.2)}
+.sex{background:var(--bdim);color:var(--blue);border:1px solid rgba(74,158,255,.2)}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.rbox{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.rbox h4{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+.sr{margin-bottom:14px}
+.st2{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.st2 span:first-child{color:var(--text2)}
+.st2 span:last-child{font-family:var(--mono);color:var(--amber);font-weight:500}
+input[type=range]{width:100%;accent-color:var(--amber)}
+.rr{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.rr:last-child{border-bottom:none;font-weight:500}
+.rr span:first-child{color:var(--text2)}
+.rr span:last-child{font-family:var(--mono);color:var(--text)}
+.rr.hl span:last-child{color:var(--amber)}
+.pcontrols{display:flex;gap:12px;margin-bottom:18px;align-items:flex-end;flex-wrap:wrap}
+.pcontrols label{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:5px}
+select{background:var(--bg3);color:var(--text);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-size:13px;font-family:var(--sans);cursor:pointer}
+.ins{background:var(--adim);border:1px solid rgba(245,166,35,.25);border-radius:var(--r);padding:12px 16px;margin-top:14px;font-size:13px;color:var(--text2);line-height:1.6}
+.ins strong{color:var(--amber)}
+.rscen{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:16px}
+.rscen h4{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.repgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.rin label{font-size:12px;color:var(--text2);display:block;margin-bottom:5px}
+.rin input[type=number]{background:var(--bg3);color:var(--text);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-size:13px;font-family:var(--mono);width:100%}
+.rres{background:var(--bg3);border-radius:6px;padding:14px 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
+.rst-label{font-size:11px;color:var(--text3);margin-bottom:4px}
+.rst-val{font-family:var(--mono);font-size:16px;font-weight:500;color:var(--amber)}
+.rst-val.ok{color:var(--green)}
+.exp-item{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--border)}
+.exp-item:last-child{border-bottom:none}
+.edates{font-family:var(--mono);font-size:11px;color:var(--amber);margin-bottom:6px}
+.ecomp{font-size:13px;font-weight:500;margin-bottom:2px}
+.eloc{font-size:11px;color:var(--text3)}
+.erole{font-size:15px;font-weight:600;margin-bottom:6px}
+.esys{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.stag{font-family:var(--mono);font-size:10px;color:var(--text3);background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:2px 6px}
+.ebul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.ebul li{font-size:13px;color:var(--text2);padding-left:16px;position:relative;line-height:1.5}
+.ebul li::before{content:'>';position:absolute;left:0;color:var(--amber);font-family:var(--mono);font-size:16px;line-height:1.3}
+.ebul li strong{color:var(--text);font-weight:500}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ccard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.cico{font-size:16px;color:var(--amber);flex-shrink:0;margin-top:2px}
+.cname{font-size:13px;font-weight:500;margin-bottom:2px}
+.corg{font-size:11px;color:var(--text3)}
+.footer{padding:28px 48px;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.fn{font-family:var(--mono);font-size:12px;color:var(--text3)}
+.fl{display:flex;gap:20px}
+.fl a{font-size:12px;color:var(--text3)}
+.fl a:hover{color:var(--amber)}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.hero,section{padding:28px 20px}.pgrid,.igrid,.rgrid,.c2,.cgrid{grid-template-columns:1fr}.pc.feat{grid-column:auto}.krow,.repgrid{grid-template-columns:repeat(2,1fr)}.exp-item{grid-template-columns:1fr;gap:6px}.rres{grid-template-columns:repeat(2,1fr)}.footer{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <div class="sb-top">
+    <div class="rank">SGT (RET.) -- U.S. ARMY</div>
+    <div class="sb-name">Ruben V. Mendoza</div>
+    <div class="sb-title">WMS &amp; Supply Chain Systems Analyst<br>Inventory Control Manager</div>
+  </div>
+  <div class="sb-contact">
+    <div class="ci"><span style="font-size:13px;color:var(--text3)">@</span><a href="mailto:MendozaArmyRetired88@gmail.com" style="font-size:11px">MendozaArmyRetired88@gmail.com</a></div>
+    <div class="ci"><span style="font-size:12px;color:var(--text3)">#</span><span style="font-size:12px">(910) 723-5545</span></div>
+    <div class="ci"><span style="font-size:12px;color:var(--text3)">*</span><span style="font-size:12px">Newport News, VA</span></div>
+  </div>
+  <nav class="sb-nav">
+    <div class="nlabel">Navigate</div>
+    <a href="#projects" class="ni active"><span class="dot"></span>Projects</a>
+    <a href="#demo" class="ni"><span class="dot"></span>Analytics Demo</a>
+    <a href="#experience" class="ni"><span class="dot"></span>Experience</a>
+    <a href="#certifications" class="ni"><span class="dot"></span>Certifications</a>
+  </nav>
+  <div class="sb-skills">
+    <div class="slabel">Systems &amp; Tools</div>
+    <div class="chips">
+      <span class="chip w">Aptean Apprise</span><span class="chip w">Epicor Indago</span><span class="chip w">SAP ERP</span><span class="chip w">Oracle SCM</span><span class="chip w">RedPrairie</span>
+      <span class="chip">Tableau</span><span class="chip">Excel</span><span class="chip">Apps Script</span><span class="chip">AutoHotkey</span><span class="chip">AI Analytics</span><span class="chip">Lean Six Sigma</span>
+    </div>
+  </div>
+</aside>
+
+<div class="main">
+<div class="hero">
+  <div class="eyebrow">WMS Administration -- Inventory Control -- Supply Chain Analytics</div>
+  <h1>I build systems that make<br>warehouses <span>actually work.</span></h1>
+  <p class="sub">Fifteen years across military logistics, distribution, and manufacturing. I configure WMS platforms, build custom inventory tools, and turn operational chaos into clean, trackable workflows -- from bin strategy to analytics dashboards.</p>
+  <div class="hstats">
+    <div><div class="snum">99<span>.87%</span></div><div class="slbl">On-time order rate achieved</div></div>
+    <div><div class="snum">&lt;20<span>%</span></div><div class="slbl">Turnover (down from 164%)</div></div>
+    <div><div class="snum">1M<span>+</span></div><div class="slbl">Units cycle counted / month</div></div>
+    <div><div class="snum">5<span> WMS</span></div><div class="slbl">Platforms administered</div></div>
+  </div>
+  <div class="ctas">
+    <a href="https://stokora.vercel.app/demo" target="_blank" class="btnp">View Stokora WMS Demo &rarr;</a>
+    <a href="https://northside-dashboard.vercel.app/dashboard" target="_blank" class="btno">Ops Dashboard &rarr;</a>
+    <a href="#demo" class="btno">Analytics Demo</a>
+  </div>
+</div>
+
+<section id="projects">
+  <div class="se">Built &amp; deployed</div>
+  <div class="st">Systems &amp; tools I have shipped</div>
+  <div class="ss">Applications built to solve real warehouse operations problems</div>
+  <div class="pgrid">
+
+    <div class="pc feat">
+      <div class="ph"><div><div class="pname">Stokora WMS</div><div class="porg">Personal Product -- Live Demo</div></div><span class="badge blive">LIVE DEMO</span></div>
+      <div class="pb">
+        <p class="pdesc">A full warehouse management system I designed and built -- positioned as an affordable WMS for small to mid-sized operations. Four distinct role-based interfaces, each scoped to what that role actually needs.</p>
+        <ul class="pbul">
+          <li>Management desktop: dashboard, analytics, inventory, orders, compliance, billing</li>
+          <li>Warehouse associate scanner: task queue, barcode scanning, pick / putaway / replenish / cycle count workflows</li>
+          <li>Cashier register: POS with payment types, tax, discounts, hold/recall, receipts</li>
+          <li>B2B customer portal: catalog browsing, negotiated pricing, order history, shipment tracking</li>
+          <li>97 routes, full WMS compliance, lot/serial tracking, FEFO/FIFO enforcement, multi-location support</li>
+        </ul>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <div class="ptags"><span class="ptag">WMS Design</span><span class="ptag">Role-Based UX</span><span class="ptag">Inventory Logic</span><span class="ptag">Barcode Workflows</span><span class="ptag">Lot/Serial Tracking</span></div>
+          <a href="https://stokora.vercel.app/demo" target="_blank" class="btnp" style="font-size:12px;padding:8px 16px;margin-left:auto">Open Live Demo &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pc">
+      <div class="ph"><div><div class="pname">Operations Dashboard</div><div class="porg">Personal Project -- Live</div></div><span class="badge blive">LIVE</span></div>
+      <div class="pb">
+        <p class="pdesc">Business operations dashboard: monthly revenue tracking, order volume, average order value, inventory alerts, and low-stock reorder visibility.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px">
+          <div class="ptags"><span class="ptag">Dashboard</span><span class="ptag">KPI Reporting</span><span class="ptag">Inventory Alerts</span></div>
+          <a href="https://northside-dashboard.vercel.app/dashboard" target="_blank" class="btno" style="font-size:12px;padding:6px 12px;margin-left:auto">View &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pc">
+      <div class="ph"><div><div class="pname">C&amp;F Inventory Control Portal</div><div class="porg">C&amp;F Enterprises -- Internal</div></div><span class="badge bbuilt">BUILT</span></div>
+      <div class="pb">
+        <p class="pdesc">Web portal centralizing IC issue intake, visibility, and follow-up. Replaced fragmented spreadsheets and email threads with structured, accountable tracking.</p>
+        <div class="ptags" style="margin-top:12px"><span class="ptag">Apps Script</span><span class="ptag">Forms / Sheets</span><span class="ptag">Automation</span><span class="ptag">Status Visibility</span></div>
+      </div>
+    </div>
+
+    <div class="pc">
+      <div class="ph"><div><div class="pname">C&amp;F Returns Process Portal</div><div class="porg">C&amp;F Enterprises -- Internal</div></div><span class="badge bbuilt">BUILT</span></div>
+      <div class="pb">
+        <p class="pdesc">Returns tracking portal turning manual return procedures into a structured digital workflow -- consistent process, clear visibility, no missed steps.</p>
+        <div class="ptags" style="margin-top:12px"><span class="ptag">Process Design</span><span class="ptag">Return Tracking</span><span class="ptag">Workflow</span></div>
+      </div>
+    </div>
+
+    <div class="pc">
+      <div class="ph"><div><div class="pname">IC Inquiry Ticketing System</div><div class="porg">C&amp;F Enterprises -- Internal</div></div><span class="badge bbuilt">BUILT</span></div>
+      <div class="pb">
+        <p class="pdesc">Automated intake system via Google Forms, Sheets, and Apps Script. Handles routing, email confirmations, status updates, task tracking, and archiving without manual effort.</p>
+        <div class="ptags" style="margin-top:12px"><span class="ptag">Apps Script</span><span class="ptag">Automation</span><span class="ptag">Email Workflow</span><span class="ptag">Task Tracking</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="demo">
+  <div class="se">Interactive tools</div>
+  <div class="st">Analytics demo</div>
+  <div class="ss">Four tools reflecting real supply chain analyst work -- inventory health, replenishment modeling, ABCD/Pareto analysis, and demand forecasting</div>
+
+  <div class="tabs">
+    <button class="tbtn active" onclick="switchTab('inv',this)">Inventory Health</button>
+    <button class="tbtn" onclick="switchTab('replen',this)">Replenishment Model</button>
+    <button class="tbtn" onclick="switchTab('pareto',this)">ABCD / Pareto</button>
+    <button class="tbtn" onclick="switchTab('forecast',this)">Demand Forecast</button>
+  </div>
+
+  <!-- INVENTORY HEALTH -->
+  <div id="tab-inv" class="tpanel active">
+    <div class="krow">
+      <div class="kpi"><div class="kl">Inventory accuracy</div><div class="kv">97.4%</div><div class="kd up">+4.2 pts this quarter</div></div>
+      <div class="kpi"><div class="kl">Discrepant locations</div><div class="kv">31</div><div class="kd wa">of 1,840 active bins</div></div>
+      <div class="kpi"><div class="kl">Stockouts (30 days)</div><div class="kv">7</div><div class="kd dg">down from 22 last period</div></div>
+      <div class="kpi"><div class="kl">Excess / slow-moving</div><div class="kv">$41,200</div><div class="kd wa">18 SKUs flagged</div></div>
+    </div>
+    <div class="igrid">
+      <div class="itw">
+        <div class="clbl">Inventory status by SKU</div>
+        <table class="inv">
+          <thead><tr><th>SKU</th><th>Description</th><th>On Hand</th><th>Min</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>1042-A</td><td>HVAC Filter 16x25</td><td>342</td><td>200</td><td><span class="sp sok">In Stock</span></td></tr>
+            <tr><td>2081-C</td><td>Condenser Coil</td><td>14</td><td>50</td><td><span class="sp slow">Low Stock</span></td></tr>
+            <tr><td>3190-B</td><td>Fan Motor 1/3HP</td><td>0</td><td>25</td><td><span class="sp sout">Stockout</span></td></tr>
+            <tr><td>1077-D</td><td>Copper Tubing 1/2"</td><td>880</td><td>100</td><td><span class="sp sex">Excess</span></td></tr>
+            <tr><td>4021-A</td><td>Refrigerant R-410A</td><td>61</td><td>40</td><td><span class="sp sok">In Stock</span></td></tr>
+            <tr><td>2045-B</td><td>Capacitor 45/5 MFD</td><td>18</td><td>75</td><td><span class="sp slow">Low Stock</span></td></tr>
+            <tr><td>5012-A</td><td>Blower Wheel 10"</td><td>0</td><td>15</td><td><span class="sp sout">Stockout</span></td></tr>
+            <tr><td>1088-C</td><td>PVC Drain Line 3/4"</td><td>1,240</td><td>150</td><td><span class="sp sex">Excess</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="cbox" style="margin-bottom:12px">
+          <div class="clbl">Inventory accuracy trend -- 12 months</div>
+          <canvas id="accChart" height="150"></canvas>
+        </div>
+        <div class="cbox">
+          <div class="clbl">SKU count by ABCD category</div>
+          <canvas id="abcChart" height="140"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPLENISHMENT MODEL -->
+  <div id="tab-replen" class="tpanel">
+    <div class="rscen">
+      <h4>Min/max replenishment calculator</h4>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:16px;line-height:1.6">Based on actual daily demand, lead time, and service level targets -- the same logic used to configure min/max rules in Aptean Apprise and Epicor Indago.</p>
+      <div class="repgrid">
+        <div class="rin"><label>Avg daily demand (units)</label><input type="number" id="rDemand" value="45" oninput="calcReplen()"></div>
+        <div class="rin"><label>Demand std deviation</label><input type="number" id="rStd" value="12" oninput="calcReplen()"></div>
+        <div class="rin"><label>Lead time (days)</label><input type="number" id="rLead" value="5" oninput="calcReplen()"></div>
+        <div class="rin"><label>Review cycle (days)</label><input type="number" id="rReview" value="7" oninput="calcReplen()"></div>
+        <div class="rin"><label>Service level target</label>
+          <select id="rService" onchange="calcReplen()" style="width:100%">
+            <option value="1.28">90%</option><option value="1.65" selected>95%</option><option value="2.05">98%</option><option value="2.33">99%</option>
+          </select>
+        </div>
+        <div class="rin"><label>Unit cost ($)</label><input type="number" id="rCost" value="32" oninput="calcReplen()"></div>
+      </div>
+      <div class="rres" id="replenOut"></div>
+    </div>
+    <div class="cbox">
+      <div class="clbl">Replenishment cycle simulation -- 90-day inventory level</div>
+      <canvas id="replenChart" height="200"></canvas>
+    </div>
+  </div>
+
+  <!-- PARETO -->
+  <div id="tab-pareto" class="tpanel">
+    <div class="pcontrols">
+      <div><label>View by</label>
+        <select id="pView" onchange="drawPareto()"><option>Revenue contribution</option><option>Order frequency</option><option>Pick volume</option></select>
+      </div>
+      <div><label>Location</label>
+        <select id="pLoc" onchange="drawPareto()"><option>All divisions</option><option>Division A -- HVAC</option><option>Division B -- Parts</option></select>
+      </div>
+    </div>
+    <div class="c2">
+      <div class="cbox">
+        <div class="clbl">Pareto -- cumulative % by SKU rank</div>
+        <canvas id="paretoChart" height="240"></canvas>
+      </div>
+      <div class="cbox">
+        <div class="clbl">SKU count by ABCD category</div>
+        <canvas id="abcPieChart" height="240"></canvas>
+      </div>
+    </div>
+    <div class="ins" id="paretoInsight"></div>
+  </div>
+
+  <!-- FORECAST -->
+  <div id="tab-forecast" class="tpanel">
+    <div class="pcontrols">
+      <div><label>SKU</label>
+        <select id="fcSku" onchange="drawFc()">
+          <option>1042-A -- HVAC Filter 16x25</option><option>2081-C -- Condenser Coil</option><option>4021-A -- Refrigerant R-410A</option>
+        </select>
+      </div>
+      <div><label>Method</label>
+        <select id="fcMethod" onchange="drawFc()">
+          <option>3-month moving average</option><option>Exponential smoothing</option><option>Trend + seasonality</option>
+        </select>
+      </div>
+    </div>
+    <div class="cbox" style="margin-bottom:16px">
+      <div class="clbl">Historical demand vs. forecast -- units</div>
+      <canvas id="fcChart" height="220"></canvas>
+    </div>
+    <div class="krow">
+      <div class="kpi"><div class="kl">MAE</div><div class="kv" id="fcMae" style="font-size:16px">--</div><div class="kd" style="color:var(--text3)">Mean absolute error</div></div>
+      <div class="kpi"><div class="kl">MAPE</div><div class="kv" id="fcMape" style="font-size:16px">--</div><div class="kd" style="color:var(--text3)">Mean abs % error</div></div>
+      <div class="kpi"><div class="kl">Forecast bias</div><div class="kv" id="fcBias" style="font-size:16px">--</div><div class="kd" style="color:var(--text3)">+ = over-forecast</div></div>
+      <div class="kpi"><div class="kl">Next-month forecast</div><div class="kv" id="fcNext" style="font-size:16px">--</div><div class="kd" style="color:var(--text3)">Projected units</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="se">Career history</div>
+  <div class="st">Professional experience</div>
+  <div class="ss"></div>
+  <div>
+    <div class="exp-item">
+      <div><div class="edates">Jan 2024 -- Present</div><div class="ecomp">C&amp;F Enterprises</div><div class="eloc">Newport News, VA</div></div>
+      <div>
+        <div class="erole">Inventory Control Manager / WMS &amp; Systems Admin</div>
+        <div class="esys"><span class="stag">Aptean Apprise WMS</span><span class="stag">Google Apps Script</span><span class="stag">Excel</span><span class="stag">AI Analytics</span><span class="stag">AutoHotkey</span></div>
+        <ul class="ebul">
+          <li>Own and administer <strong>Aptean Apprise WMS</strong> configuration: bin action codes, primary pick logic, min/max replenishment, pre-pick controls, quality isolation workflows</li>
+          <li>Design warehouse bin layouts and pick-path logic using <strong>ABCD and Pareto analysis</strong> to improve space utilization and picking efficiency</li>
+          <li>Built and launched an IC inquiry ticketing system via Google Forms, Sheets, and Apps Script -- automates request intake, email confirmations, status updates, and archiving</li>
+          <li>Use AI-assisted analysis to accelerate trend identification, anomaly detection, and SOP development</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div><div class="edates">Aug 2023 -- Jul 2024</div><div class="ecomp">Reach Cooling Group</div><div class="eloc">Suffolk, VA</div></div>
+      <div>
+        <div class="erole">Warehouse Manager / Operations Systems &amp; Analytics</div>
+        <div class="esys"><span class="stag">Epicor Indago WMS</span><span class="stag">Tableau</span><span class="stag">Excel</span></div>
+        <ul class="ebul">
+          <li>Managed a <strong>33-person team</strong> across multiple shifts including assistant managers, ecommerce, IC, and QC</li>
+          <li>Improved on-time order processing from <strong>91.91% to 99.87%</strong> through workflow standardization and operational follow-up</li>
+          <li>Unified IC and QC into an Integrated Control system -- cycle count completion from <strong>below 1% to above target</strong></li>
+          <li>Reduced associate turnover from <strong>164% to below 20%</strong>; training completion from 51.37% to 197.25%</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div><div class="edates">Jan 2021 -- Jul 2023</div><div class="ecomp">U.S. Army Active Duty</div><div class="eloc">Fort Bragg, NC</div></div>
+      <div>
+        <div class="erole">Operations / Dispatcher -- Unit Supply Sergeant</div>
+        <div class="esys"><span class="stag">SAP ERP / GCSS-Army</span><span class="stag">Excel</span></div>
+        <ul class="ebul">
+          <li>Managed inventory accountability using SAP ERP / GCSS-Army in a high-tempo military logistics environment</li>
+          <li>Analyzed consumption patterns and equipment status to forecast demand and optimize stock availability</li>
+          <li>Received <strong>Army Achievement Medal</strong> for software innovation and process improvement</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div><div class="edates">Apr 2019 -- Jun 2020</div><div class="ecomp">Holdrite / RWC</div><div class="eloc">La Vergne, TN</div></div>
+      <div>
+        <div class="erole">Inventory Control Manager -- SAP Systems</div>
+        <div class="esys"><span class="stag">SAP ERP / MM</span><span class="stag">MIGO</span><span class="stag">LT24 / LT22 / LS24</span><span class="stag">Excel</span></div>
+        <ul class="ebul">
+          <li>Owned SAP MM inventory control: cycle counting, adjustments, discrepancy investigations, material movement review</li>
+          <li>Led high-volume cycle counts across <strong>500K to 1.1M pieces per month</strong> with full accuracy accountability</li>
+          <li>Served as SAP trainer, improving transaction accuracy and user proficiency across warehouse and production teams</li>
+          <li>Built advanced Excel workbooks, Kanban tools, and graphs for raw material planning and inventory visibility</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div><div class="edates">Mar 2011 -- Dec 2017</div><div class="ecomp">U.S. Army Reserves</div><div class="eloc">Tobyhanna, PA</div></div>
+      <div>
+        <div class="erole">Information Technology Specialist (25B)</div>
+        <div class="esys"><span class="stag">Military IT / Comms</span></div>
+        <ul class="ebul">
+          <li>Communications equipment maintenance, company accountability, and mission readiness</li>
+          <li>Conducted motor pool and Conex storage inventory audits to support accountability standards</li>
+        </ul>
+      </div>
+    </div>
+    <div style="padding:16px 0 0">
+      <div style="font-family:var(--mono);font-size:11px;color:var(--amber);margin-bottom:8px">ADDITIONAL ROLES</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span class="chip">Inventory Auditor -- ROMARK Logistics (RedPrairie)</span>
+        <span class="chip">IC Specialist -- Imperial Supplies / W.W. Grainger (Oracle SCM)</span>
+        <span class="chip">Inbound Receiving -- AutoZone Distribution (Oracle SCM)</span>
+        <span class="chip">IC Specialist -- Sears Roebuck</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="se">Credentials</div>
+  <div class="st">Certifications &amp; education</div>
+  <div class="ss"></div>
+  <div class="cgrid">
+    <div class="ccard"><div class="cico">*</div><div><div class="cname">Lean Six Sigma Green Belt</div><div class="corg">Process Improvement &amp; Quality</div></div></div>
+    <div class="ccard"><div class="cico">*</div><div><div class="cname">Supply Chain Warehousing Certificate</div><div class="corg">ASCM / Prologis</div></div></div>
+    <div class="ccard"><div class="cico">*</div><div><div class="cname">SAP ERP / GCSS-Army</div><div class="corg">Supply Requisition, Navigation, Data Mining, Equipment Records, Unit Supply</div></div></div>
+    <div class="ccard"><div class="cico">*</div><div><div class="cname">DoD Secret Security Clearance</div><div class="corg">Issued March 2021 -- expired, not currently active</div></div></div>
+  </div>
+  <div style="margin-top:16px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:14px;font-weight:500">B.S. Data Analytics -- Junior Year</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:2px">Southern New Hampshire University -- Distance Learning</div>
+    </div>
+    <span class="badge blive">IN PROGRESS</span>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="fn">RUBEN V. MENDOZA -- NEWPORT NEWS, VA</div>
+  <div class="fl">
+    <a href="https://stokora.vercel.app/demo" target="_blank">Stokora WMS</a>
+    <a href="https://northside-dashboard.vercel.app/dashboard" target="_blank">Ops Dashboard</a>
+    <a href="mailto:MendozaArmyRetired88@gmail.com">Email</a>
+  </div>
+</footer>
+</div>
+</div>
+
+<script>
+Chart.defaults.color='#545c6e';
+Chart.defaults.borderColor='rgba(255,255,255,0.07)';
+Chart.defaults.font.family="'IBM Plex Mono',monospace";
+Chart.defaults.font.size=11;
+
+function switchTab(id,btn){
+  document.querySelectorAll('.tpanel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='replen'&&!window.rR){setTimeout(()=>{calcReplen();},60);window.rR=true;}
+  if(id==='pareto'&&!window.pR){setTimeout(()=>{drawPareto();},60);window.pR=true;}
+  if(id==='forecast'&&!window.fR){setTimeout(()=>{drawFc();},60);window.fR=true;}
+}
+
+window.addEventListener('scroll',()=>{
+  ['projects','demo','experience','certifications'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&el.getBoundingClientRect().top<=100)
+      document.querySelectorAll('.ni').forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));
+  });
+},{passive:true});
+
+window.addEventListener('load',()=>{
+  const mo=['Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'];
+  const acc=[88.1,89.5,91.2,92.7,93.8,94.5,94.9,95.8,96.4,97.0,97.2,97.4];
+  new Chart(document.getElementById('accChart'),{
+    type:'line',
+    data:{labels:mo,datasets:[{data:acc,borderColor:'#f5a623',backgroundColor:'rgba(245,166,35,0.07)',fill:true,tension:0.4,pointRadius:3,pointBackgroundColor:'#f5a623'}]},
+    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#545c6e'},grid:{color:'rgba(255,255,255,0.05)'}},y:{min:84,max:101,ticks:{color:'#545c6e',callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.05)'}}}}
+  });
+  new Chart(document.getElementById('abcChart'),{
+    type:'bar',
+    data:{labels:['A -- High value','B -- Mid value','C -- Low value'],datasets:[{data:[42,98,312],backgroundColor:['#f5a623','#4a9eff','#1a1e26'],borderColor:['rgba(245,166,35,.5)','rgba(74,158,255,.5)','rgba(255,255,255,.15)'],borderWidth:1,borderRadius:3}]},
+    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#545c6e'},grid:{color:'rgba(255,255,255,0.05)'}},y:{ticks:{color:'#545c6e'},grid:{color:'rgba(255,255,255,0.05)'}}}}
+  });
+});
+
+let rCh=null;
+function calcReplen(){
+  const d=+document.getElementById('rDemand').value||1;
+  const s=+document.getElementById('rStd').value||0;
+  const l=+document.getElementById('rLead').value||1;
+  const r=+document.getElementById('rReview').value||1;
+  const z=+document.getElementById('rService').value;
+  const c=+document.getElementById('rCost').value||1;
+  const ss=Math.round(z*s*Math.sqrt(l+r));
+  const mn=Math.round(d*l+ss);
+  const mx=Math.round(d*(l+r)+ss);
+  const oq=mx-mn;
+  document.getElementById('replenOut').innerHTML=`
+    <div class="rst-label">Safety stock</div><div class="rst-val">${ss.toLocaleString()} units</div>
+    <div class="rst-label">Reorder point (MIN)</div><div class="rst-val">${mn.toLocaleString()} units</div>
+    <div class="rst-label">Max level</div><div class="rst-val">${mx.toLocaleString()} units</div>
+    <div class="rst-label">Replen qty</div><div class="rst-val ok">${oq.toLocaleString()} units</div>
+  `;
+  const days=Array.from({length:90},(_,i)=>'D'+(i+1));
+  let inv=mx; const il=[],minL=[],maxL=[];
+  for(let i=0;i<90;i++){
+    const dem=Math.max(0,Math.round(d+(Math.random()-.5)*2*s));
+    inv-=dem;
+    if(inv<=mn) inv+=oq;
+    il.push(inv); minL.push(mn); maxL.push(mx);
+  }
+  if(rCh) rCh.destroy();
+  rCh=new Chart(document.getElementById('replenChart'),{
+    type:'line',
+    data:{labels:days,datasets:[
+      {label:'Inventory level',data:il,borderColor:'#4a9eff',backgroundColor:'rgba(74,158,255,0.06)',fill:true,tension:0.3,pointRadius:0},
+      {label:'MIN (reorder pt)',data:minL,borderColor:'#f5a623',borderDash:[4,3],pointRadius:0,borderWidth:1.5},
+      {label:'MAX',data:maxL,borderColor:'rgba(52,209,122,.5)',borderDash:[4,3],pointRadius:0,borderWidth:1.5}
+    ]},
+    options:{plugins:{legend:{labels:{color:'#8a92a6',font:{size:10}}}},scales:{x:{ticks:{color:'#545c6e',maxTicksLimit:10},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#545c6e'},grid:{color:'rgba(255,255,255,0.04)'}}}}
+  });
+}
+
+let pCh=null,pieCh=null;
+function drawPareto(){
+  const view=document.getElementById('pView').value;
+  const loc=document.getElementById('pLoc').value;
+  const sk=['SKU-001','SKU-002','SKU-003','SKU-004','SKU-005','SKU-006','SKU-007','SKU-008','SKU-009','SKU-010','SKU-011','SKU-012','SKU-013','SKU-014','SKU-015'];
+  const seed=view.includes('Revenue')?1:view.includes('Order')?2:3;
+  const vals=[38,18,11,7,5,4,3.5,3,2.5,2,1.5,1.2,1,.9,.9].map((v,i)=>+(v*(1+(seed-2)*.1+(loc.includes('HVAC')?.05*i:loc.includes('Parts')?-.03*i:0))).toFixed(1));
+  const total=vals.reduce((a,b)=>a+b,0);
+  let cum=0;
+  const cp=vals.map(v=>{cum+=v;return Math.round((cum/total)*100);});
+  const bc=cp.map(c=>c<=70?'#f5a623':c<=90?'#4a9eff':'#1a1e26');
+  const bbc=cp.map(c=>c<=70?'rgba(245,166,35,.6)':c<=90?'rgba(74,158,255,.6)':'rgba(255,255,255,.15)');
+  if(pCh) pCh.destroy();
+  pCh=new Chart(document.getElementById('paretoChart'),{
+    data:{labels:sk,datasets:[
+      {type:'bar',label:view,data:vals,backgroundColor:bc,borderColor:bbc,borderWidth:1,borderRadius:3,yAxisID:'y'},
+      {type:'line',label:'Cumulative %',data:cp,borderColor:'#34d17a',pointRadius:3,pointBackgroundColor:'#34d17a',tension:0,yAxisID:'y1'}
+    ]},
+    options:{plugins:{legend:{labels:{color:'#8a92a6',font:{size:10}}}},scales:{x:{ticks:{color:'#545c6e',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#545c6e'},grid:{color:'rgba(255,255,255,0.04)'}},y1:{position:'right',min:0,max:100,ticks:{color:'#545c6e',callback:v=>v+'%'},grid:{display:false}}}}
+  });
+  const aC=cp.filter(c=>c<=70).length, bC=cp.filter(c=>c>70&&c<=90).length, cC=cp.filter(c=>c>90).length;
+  if(pieCh) pieCh.destroy();
+  pieCh=new Chart(document.getElementById('abcPieChart'),{
+    type:'doughnut',
+    data:{labels:['A items (top 70%)','B items (70-90%)','C items (90-100%)'],datasets:[{data:[aC,bC,cC],backgroundColor:['#f5a623','#4a9eff','#1a1e26'],borderColor:['rgba(245,166,35,.4)','rgba(74,158,255,.4)','rgba(255,255,255,.1)'],borderWidth:1}]},
+    options:{plugins:{legend:{position:'bottom',labels:{color:'#8a92a6',font:{size:10},padding:12}}}}
+  });
+  document.getElementById('paretoInsight').innerHTML=`<strong>Analysis:</strong> ${aC} SKUs (${Math.round(aC/sk.length*100)}% of items) drive 70% of ${view.toLowerCase()}. These A items deserve primary pick locations, tighter cycle count frequency, and min/max rules tuned to a 98%+ service level. The ${cC} C items represent roughly 10% of value and are candidates for bin consolidation or reduced replenishment priority.`;
+}
+
+let fCh=null;
+function drawFc(){
+  const sku=document.getElementById('fcSku').value;
+  const meth=document.getElementById('fcMethod').value;
+  const s=sku.includes('1042')?1:sku.includes('2081')?2:3;
+  const seas=s===2?[.8,.85,1.0,1.2,1.3,1.1,.9,1.4,1.2,.9,.8,1.1]:s===1?[1.1,1.0,.9,.95,1.0,1.15,1.2,1.15,1.0,.95,1.1,1.2]:[1.0,.95,1.0,1.05,1.1,1.1,1.05,1.0,.95,.9,1.05,1.1];
+  const base=[210,195,220,240,250,230,260,280,290,275,300,310,305,320,335,350,345,360];
+  const hist=base.map((v,i)=>Math.round(v*seas[i%12]*(1+(s-2)*.08)+Math.sin(i*1.3+s)*14));
+  const hl=14; const train=hist.slice(0,hl); let fc=[];
+  if(meth.includes('3-month')){ for(let i=hl;i<hist.length+3;i++){const p=[...train,...fc].slice(-3);fc.push(Math.round(p.reduce((a,b)=>a+b)/3));} }
+  else if(meth.includes('Exponential')){ let sv=train[0];const a=.35; for(let i=1;i<hl;i++) sv=a*train[i]+(1-a)*sv; for(let i=0;i<hist.length-hl+3;i++){sv=a*(hist[hl+i-1]||sv)+(1-a)*sv;fc.push(Math.round(sv));} }
+  else{ const tr=(train[train.length-1]-train[0])/train.length; for(let i=0;i<hist.length-hl+3;i++) fc.push(Math.round(train[train.length-1]+tr*(i+1)*1.05*seas[(hl+i)%12])); }
+  const labs=Array.from({length:hist.length+3},(_,i)=>{const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return m[(i+6)%12]+"'"+(String(23+Math.floor((i+6)/12)).slice(-2));});
+  const errs=hist.slice(hl).map((v,i)=>Math.abs(v-fc[i]));
+  const mae=errs.length?Math.round(errs.reduce((a,b)=>a+b)/errs.length):0;
+  const mape=errs.length?(errs.map((e,i)=>e/hist[hl+i]).reduce((a,b)=>a+b)/errs.length*100).toFixed(1):0;
+  const bias=errs.length?Math.round(fc.slice(0,errs.length).reduce((a,b)=>a+b)/errs.length-hist.slice(hl).reduce((a,b)=>a+b)/errs.length):0;
+  document.getElementById('fcMae').textContent=mae+' units';
+  document.getElementById('fcMape').textContent=mape+'%';
+  document.getElementById('fcBias').textContent=(bias>=0?'+':'')+bias;
+  document.getElementById('fcNext').textContent=fc[fc.length-1].toLocaleString();
+  if(fCh) fCh.destroy();
+  fCh=new Chart(document.getElementById('fcChart'),{
+    type:'line',
+    data:{labels:labs,datasets:[
+      {label:'Actual demand',data:[...hist,null,null,null],borderColor:'#4a9eff',backgroundColor:'rgba(74,158,255,0.06)',fill:true,tension:.4,pointRadius:2},
+      {label:'Forecast',data:[...Array(hl).fill(null),...fc],borderColor:'#f5a623',borderDash:[5,4],backgroundColor:'rgba(245,166,35,0.06)',fill:true,tension:.4,pointRadius:3}
+    ]},
+    options:{plugins:{legend:{labels:{color:'#8a92a6',font:{size:10}}}},scales:{x:{ticks:{color:'#545c6e',maxTicksLimit:10},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#545c6e'},grid:{color:'rgba(255,255,255,0.04)'}}}}
+  });
+}
+<\/script>
+</body>
+</html>
