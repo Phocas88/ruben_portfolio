@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>IC Scanner Demo | Ruben Mendoza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#101824;--panel:#182334;--panel2:#223149;--line:#34445f;--text:#e7eef8;--muted:#8da0b7;--green:#25d19b;--red:#f05d5e;--warn:#f7b955;--blue:#65a6ff;--mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh}button,input,select{font-family:inherit}.phone{max-width:460px;margin:0 auto;min-height:100vh;background:linear-gradient(180deg,#111b29,#0f1723);border-left:1px solid var(--line);border-right:1px solid var(--line)}.top{position:sticky;top:0;z-index:10;background:rgba(24,35,52,.96);border-bottom:1px solid var(--line);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand strong{font-family:var(--mono);font-size:14px;color:var(--green);letter-spacing:.09em}.brand span{display:block;font-size:11px;color:var(--muted);margin-top:2px}.chip{font-family:var(--mono);font-size:11px;color:var(--green);border:1px solid rgba(37,209,155,.35);background:rgba(37,209,155,.1);border-radius:999px;padding:6px 9px}.tabs{display:grid;grid-template-columns:repeat(3,1fr);background:var(--panel);border-bottom:1px solid var(--line)}.tab{border:0;background:transparent;color:var(--muted);padding:11px 4px;font-size:12px;font-weight:700;border-bottom:2px solid transparent}.tab.active{color:var(--green);border-bottom-color:var(--green)}.main{padding:16px}.banner{border:1px solid rgba(37,209,155,.3);background:rgba(37,209,155,.09);border-radius:12px;padding:12px 14px;margin-bottom:14px}.banner b{display:block;color:var(--green);font-size:13px}.banner span{font-size:12px;color:var(--muted)}.label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin:16px 0 7px}.group{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden}.row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line)}.row:last-child{border-bottom:0}.ico{width:34px;height:34px;border-radius:10px;background:rgba(37,209,155,.1);display:grid;place-items:center}.field{flex:1}.field label{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}.field input,.field select{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-family:var(--mono);font-size:16px;font-weight:500}.field select option{background:#182334;color:#e7eef8}.btn{width:100%;border:0;border-radius:12px;background:var(--green);color:#07120e;padding:13px 14px;font-weight:800;font-size:15px;margin-top:12px;cursor:pointer}.btn.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}.btn.warn{background:rgba(247,185,85,.12);color:var(--warn);border:1px solid rgba(247,185,85,.35)}.staged{display:grid;gap:8px;margin-top:8px}.item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}.pc{font-family:var(--mono);font-weight:700}.desc{font-size:12px;color:var(--muted);margin-top:2px}.qty{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--green);text-align:right}.mini{font-size:10px;color:var(--muted);text-align:right;text-transform:uppercase}.pill{font-family:var(--mono);font-size:10px;border-radius:999px;padding:4px 7px;display:inline-flex;margin-top:7px}.ok{color:var(--green);background:rgba(37,209,155,.1)}.bad{color:var(--red);background:rgba(240,93,94,.12)}.warnp{color:var(--warn);background:rgba(247,185,85,.12)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}.stat b{font-family:var(--mono);font-size:21px;color:var(--green);display:block}.stat span{font-size:10px;color:var(--muted);text-transform:uppercase}.table{width:100%;border-collapse:collapse;background:var(--panel);border-radius:12px;overflow:hidden}th,td{padding:10px;border-bottom:1px solid var(--line);font-size:12px;text-align:left}th{font-family:var(--mono);font-size:10px;color:var(--muted);background:var(--panel2)}.hidden{display:none}.back{display:inline-flex;color:var(--muted);font-size:12px;text-decoration:none;margin-bottom:12px}.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(100px);width:calc(100% - 30px);max-width:420px;background:#0d141f;border:1px solid var(--line);border-radius:14px;padding:13px 14px;transition:.25s;box-shadow:0 14px 40px rgba(0,0,0,.4)}.toast.show{transform:translateX(-50%) translateY(0)}.toast b{display:block;font-size:13px}.toast span{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="phone">
+<header class="top"><div class="brand"><strong>IC SCANNER</strong><span>demo data, no live database</span></div><div class="chip" id="locChip">Atlas</div></header>
+<div class="tabs"><button class="tab active" data-screen="scan">Scan</button><button class="tab" data-screen="queue">Queue</button><button class="tab" data-screen="export">Export</button></div>
+<main class="main">
+<a class="back" href="../../index.html">Back to portfolio</a>
+<section id="scan" class="screen">
+  <div class="banner"><b>Bin-first count flow</b><span>Lock a bin, scan products, stage quantities, then review variance before export.</span></div>
+  <div class="label">Default settings</div>
+  <div class="group">
+    <div class="row"><div class="ico">🏷️</div><div class="field"><label>Division</label><select id="division"><option>Atlas</option><option>Beacon</option><option>Summit</option></select></div></div>
+    <div class="row"><div class="ico">📍</div><div class="field"><label>Bin location</label><input id="bin" value="35-12-02"></div></div>
+  </div>
+  <div class="label">Scan product</div>
+  <div class="group">
+    <div class="row"><div class="ico">▥</div><div class="field"><label>Product code</label><input id="sku" placeholder="Try AX-10482 or BX-88401"></div></div>
+    <div class="row"><div class="ico">#</div><div class="field"><label>Counted qty</label><input id="qty" type="number" value="1"></div></div>
+  </div>
+  <button class="btn" id="addBtn">Stage count</button>
+  <button class="btn secondary" id="sampleBtn">Load sample scan</button>
+  <div class="label">Staged products</div>
+  <div class="staged" id="stagedList"></div>
+</section>
+<section id="queue" class="screen hidden">
+  <div class="stats"><div class="stat"><b id="qLines">0</b><span>Lines</span></div><div class="stat"><b id="qUnits">0</b><span>Units</span></div><div class="stat"><b id="qVar">0</b><span>Variance</span></div></div>
+  <div class="staged" id="queueList"></div>
+</section>
+<section id="export" class="screen hidden">
+  <div class="banner"><b>Export preview</b><span>This shows the type of clean output a supervisor or analyst can review before upload.</span></div>
+  <table class="table"><thead><tr><th>Bin</th><th>SKU</th><th>Count</th><th>Expected</th><th>Harbor</th></tr></thead><tbody id="exportRows"></tbody></table>
+  <button class="btn warn" id="clearBtn">Clear demo session</button>
+</section>
+</main>
+</div>
+<div class="toast" id="toast"><b></b><span></span></div>
+<script>
+const catalog={
+ 'AX-10482':{desc:'Ceramic garden pot, medium',expected:6,div:'Atlas'},
+ 'AX-22110':{desc:'Indoor floral stem, ivory',expected:12,div:'Atlas'},
+ 'BX-88401':{desc:'Tabletop accent lantern',expected:4,div:'Beacon'},
+ 'BX-11490':{desc:'Holiday wire basket',expected:8,div:'Beacon'},
+ 'Summit-45072':{desc:'Woven tray set',expected:3,div:'Summit'}
+};
+let staged=[];
+const $=id=>document.getElementById(id);
+function toast(title,msg){const t=$('toast');t.querySelector('b').textContent=title;t.querySelector('span').textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+function addItem(){const sku=$('sku').value.trim().toUpperCase();const qty=Number($('qty').value||0);const bin=$('bin').value.trim().toUpperCase();const div=$('division').value;if(!sku||qty<=0){toast('Missing scan','Enter a product code and quantity.');return}const item=catalog[sku]||{desc:'Unknown demo item',expected:0,div};staged.unshift({sku,qty,bin,div,desc:item.desc,expected:item.expected});$('sku').value='';$('qty').value=1;render();toast('Count staged',`${sku} added to ${bin}`)}
+function render(){const card=x=>{const d=x.qty-x.expected;let cls=d===0?'ok':d<0?'bad':'warnp';let label=d===0?'Match':d<0?'Short':'Over';return `<div class="item"><div><div class="pc">${x.sku}</div><div class="desc">${x.desc}<br>${x.bin} | ${x.div}</div><span class="pill ${cls}">${label} ${d>0?'+':''}${d}</span></div><div><div class="qty">${x.qty}</div><div class="mini">counted</div></div></div>`};$('stagedList').innerHTML=staged.length?staged.map(card).join(''):'<div class="item"><div><div class="pc">No staged counts</div><div class="desc">Use Load sample scan or enter a product above.</div></div></div>';$('queueList').innerHTML=staged.length?staged.map(card).join(''):'<div class="item"><div><div class="pc">Queue is empty</div><div class="desc">Counts staged on the scan tab will appear here.</div></div></div>';$('exportRows').innerHTML=staged.map(x=>`<tr><td>${x.bin}</td><td>${x.sku}</td><td>${x.qty}</td><td>${x.expected}</td><td>${x.qty-x.expected}</td></tr>`).join('');$('qLines').textContent=staged.length;$('qUnits').textContent=staged.reduce((a,x)=>a+x.qty,0);$('qVar').textContent=staged.reduce((a,x)=>a+Math.abs(x.qty-x.expected),0)}
+$('addBtn').addEventListener('click',addItem);$('sampleBtn').addEventListener('click',()=>{const samples=['AX-10482','AX-22110','BX-88401','Summit-45072'];const sku=samples[Math.floor(Math.random()*samples.length)];$('sku').value=sku;$('qty').value=Math.max(1,catalog[sku].expected+[-2,-1,0,0,1][Math.floor(Math.random()*5)]);$('division').value=catalog[sku].div;$('locChip').textContent=catalog[sku].div;addItem()});$('clearBtn').addEventListener('click',()=>{staged=[];render();toast('Session cleared','Demo data was reset.')});$('division').addEventListener('change',e=>$('locChip').textContent=e.target.value);document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));$(btn.dataset.screen).classList.remove('hidden')}));render();
+</script>
+</body>
+</html>
